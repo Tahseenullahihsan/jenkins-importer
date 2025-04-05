@@ -1,5 +1,6 @@
 name: pipline-job
 on:
+  push:
   workflow_dispatch:
 jobs:
   Check_Python_Version:
