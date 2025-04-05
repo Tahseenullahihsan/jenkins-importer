@@ -31,7 +31,7 @@ jobs:
     runs-on:
       - self-hosted
       - jenkins-external
-    defaults:
+   # defaults:
     needs: Install_Dependencies_Manually
     steps:
     - name: checkout
