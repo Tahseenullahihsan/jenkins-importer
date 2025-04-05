@@ -30,7 +30,7 @@ jobs:
     name: Run the Python Script
     runs-on:
       - self-hosted
-      - jenkins-external
+    #  - jenkins-external
    # defaults:
     needs: Install_Dependencies_Manually
     steps:
