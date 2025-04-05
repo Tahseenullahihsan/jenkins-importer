@@ -1,0 +1,43 @@
+name: pipline-job
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  Check_Python_Version:
+    name: Check Python Version
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: sh
+      shell: bash
+      run: python3 --version
+  Install_Dependencies_Manually:
+    name: Install Dependencies Manually
+    runs-on: ubuntu-latest
+    needs: Check_Python_Version
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: sh
+      shell: bash
+      run: |-
+        python3 -m venv venv
+        . venv/bin/activate
+        pip install --upgrade pip
+        pip install pandas matplotlib seaborn numpy scikit-learn
+  Run_the_Python_Script:
+    name: Run the Python Script
+    runs-on:
+      - self-hosted
+      - jenkins-external
+    defaults:
+    needs: Install_Dependencies_Manually
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4.1.0
+    - name: sh
+      shell: bash
+      run: |-
+        . venv/bin/activate
+        python3 plant_species.py
